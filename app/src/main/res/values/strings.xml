@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">CalculIMC</string>
-    <string name="accueil_taille">Taille</string>
+    <string name="accueil_taille">Taille (cm)</string>
     <string name="accueil_taille_hint">Veuillez saisir votre taille en cm</string>
-    <string name="accueil_poids">Poids</string>
+    <string name="accueil_poids">Poids (Kg)</string>
     <string name="accueil_poids_hint">Veuillez saisir votre poids en kg</string>
     <string name="accueil_calculer">Calculer</string>
     <string name="accueil_calculer_result_line1">Votre IMC est %s</string>

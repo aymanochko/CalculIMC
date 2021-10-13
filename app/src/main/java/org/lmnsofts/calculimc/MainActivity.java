@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextView;
+
+import java.text.NumberFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,13 +29,22 @@ public class MainActivity extends AppCompatActivity {
 
     public void calculerIMC(View view) {
         EditText inputPoids = findViewById(R.id.input_poids);
+        if(null == inputPoids.getText() || inputPoids.getText().length() == 0){
+            return;
+        }
         Double poidsDbl = Double.valueOf(inputPoids.getText().toString());
         EditText inputTaille = findViewById(R.id.input_taille);
+        if(null == inputPoids.getText() || inputPoids.getText().length() == 0){
+            return;
+        }
         Integer tailleInt = Integer.parseInt(inputTaille.getText().toString());
         TextView lblResultat = findViewById(R.id.lbl_calculIMC_result);
         Double valeurImc = poidsDbl/(Math.pow((double)tailleInt/100,2));
+        NumberFormat numberFormat = NumberFormat.getNumberInstance();
+        numberFormat.setMaximumFractionDigits(2);
+
         StringBuilder resultat = new StringBuilder(256);
-        resultat.append(getString(R.string.accueil_calculer_result_line1, String.valueOf(valeurImc)));
+        resultat.append(getString(R.string.accueil_calculer_result_line1, numberFormat.format(valeurImc)));
         String interpretationIMC = "Autre";
         if(valeurImc < 18.5) {
             interpretationIMC = getString(R.string.accueil_calculer_result_maigre);
@@ -55,10 +67,10 @@ public class MainActivity extends AppCompatActivity {
         }
         resultat.append("\n");
         resultat.append(getString(R.string.accueil_calculer_result_line2,interpretationIMC));
-        Double poidsIdealDebut = (Math.pow((double) tailleInt/100,2))*25;
-        Double poidsIdealFin = (Math.pow((double) tailleInt/100,2))*30;
+        Double poidsIdealDebut = (Math.pow((double) tailleInt/100,2))*18.5;
+        Double poidsIdealFin = (Math.pow((double) tailleInt/100,2))*25;
         resultat.append("\n");
-        resultat.append(getString(R.string.accueil_calculer_result_line3,String.valueOf(poidsIdealDebut), String.valueOf(poidsIdealFin)));
+        resultat.append(getString(R.string.accueil_calculer_result_line3,numberFormat.format(poidsIdealDebut), numberFormat.format(poidsIdealFin)));
         lblResultat.setText(resultat.toString());
     }
 }
